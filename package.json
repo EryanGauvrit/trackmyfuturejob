@@ -6,8 +6,11 @@
         "dev": "next dev --turbopack",
         "build": "next build",
         "start": "next start",
+        "prisma:generate": "prisma generate",
         "lint": "next lint",
-        "postinstall": "prisma generate"
+        "postinstall": "prisma generate",
+        "test": "jest",
+        "test:coverage": "jest --coverage"
     },
     "dependencies": {
         "@mdx-js/loader": "^3.1.0",
@@ -41,13 +44,21 @@
     "devDependencies": {
         "@eslint/eslintrc": "^3",
         "@tailwindcss/postcss": "^4",
+        "@testing-library/dom": "^10.4.0",
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.3.0",
+        "@types/jest": "^30.0.0",
         "@types/node": "^20",
         "@types/react": "^19",
         "@types/react-dom": "^19",
         "eslint": "^9",
         "eslint-config-next": "15.2.4",
+        "jest": "^30.0.4",
+        "jest-environment-jsdom": "^30.0.4",
+        "jest-mock-extended": "^4.0.0",
         "prisma": "^6.5.0",
         "tailwindcss": "^4",
+        "ts-node": "^10.9.2",
         "typescript": "^5"
     }
 }

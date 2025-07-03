@@ -1,9 +1,9 @@
 import ConfirmDialog from '@/components/ConfirmDialog';
 import TemplateStandardPage from '@/components/layout/TemplateStandardPage';
 import { Card } from '@/components/ui/card';
+import { User } from '@/generated/prisma';
 import { getSession } from '@/lib/auth-server';
 import { deleteUser, getConnectedUser } from '@/services/userService';
-import { User } from '@prisma/client';
 import { UserCog } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
 import PersonnalInformations from './PersonnalInformations';

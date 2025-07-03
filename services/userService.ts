@@ -1,9 +1,9 @@
 'use server';
 
+import { User } from '@/generated/prisma';
 import prisma from '@/lib/prisma';
 import { wrapResponse } from '@/lib/wrapResponse';
 import { updateUserSchema } from '@/lib/zod/userSchema';
-import { User } from '@prisma/client';
 import { BetterAuthError } from 'better-auth';
 import { isAuthenticated } from './authService';
 

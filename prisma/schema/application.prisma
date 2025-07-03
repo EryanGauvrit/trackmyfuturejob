@@ -1,0 +1,18 @@
+model Application {
+    id              String   @id @default(uuid())
+    title           String
+    company         String
+    location        String
+    address         String?
+    status          String
+    link            String?
+    notes           String?
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    interviews      Interview[]
+    userId          String
+    user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("application")
+}

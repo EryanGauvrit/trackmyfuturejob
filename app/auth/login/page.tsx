@@ -1,7 +1,7 @@
 'use client';
 
 import GoogleIcon from '@/assets/google_icon.png';
-import ButtonSubmit from '@/components/ButtonSubmit';
+import ButtonSubmit from '@/components/buttons/ButtonSubmit';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';

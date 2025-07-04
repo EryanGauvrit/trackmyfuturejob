@@ -1,8 +1,9 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
-import { Button, ButtonProps, buttonVariants } from '../../ui/button';
+import { Button, ButtonProps, buttonVariants } from '../ui/button';
 
 interface ButtonBurgerProps extends ButtonProps {
     isOpen?: boolean;
@@ -59,7 +60,7 @@ const ButtonBurger = ({
                     onClick(e);
                 }
             }}
-            className={clsx(buttonVariants({ variant, size: 'default', className }), `flex flex-col gap-[7px]`)}
+            className={cn(buttonVariants({ variant, size: 'default', className }), `flex flex-col gap-[7px]`)}
             {...props}
         >
             <span className={`h-[2px] w-[30px] bg-secondary duration-300 ${open ? `transform rotate-45 translate-y-[9px]` : ''}`}></span>

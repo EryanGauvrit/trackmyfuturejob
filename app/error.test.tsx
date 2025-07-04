@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import ErrorComp from './error';
 
-jest.mock('@/components/layout/buttons/ButtonBack', () => (props: any) => (
+jest.mock('@/components/buttons/ButtonBack', () => (props: any) => (
     <button data-testid="button-back" {...props}>
         {props.message}
     </button>

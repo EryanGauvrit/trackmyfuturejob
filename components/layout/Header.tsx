@@ -8,13 +8,13 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import ButtonSubmit from '../ButtonSubmit';
+import ButtonSubmit from '../buttons/ButtonSubmit';
 import { Button } from '../ui/button';
 import Navbar from './Navbar';
-import ButtonBurger from './buttons/ButtonBurger';
+import ButtonBurger from '../buttons/ButtonBurger';
 import dynamic from 'next/dynamic';
 
-const ButtonSwithTheme = dynamic(() => import('./buttons/ButtonSwithTheme').then((m) => m.default), {
+const ButtonSwithTheme = dynamic(() => import('../buttons/ButtonSwithTheme').then((m) => m.default), {
     ssr: false,
 });
 

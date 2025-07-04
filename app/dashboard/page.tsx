@@ -1,22 +1,26 @@
-import TemplateStandardPage from '@/components/layout/TemplateStandardPage';
+import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
 import { Config } from '@/config';
+import { StandardResponse } from '@/lib/wrapResponse';
+import { IApplication } from '@/types/application';
 import { cookies } from 'next/headers';
 import AddApplicationForm from './AddApplicationForm';
+import ApplicationTable from './table/ApplicationTable';
 
 const Page = async () => {
     const cookieHeader = (await cookies()).toString();
-    const applications = await fetch(Config.BETTER_AUTH_URL + '/api/application', {
+    const res = await fetch(Config.BETTER_AUTH_URL + '/api/application', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             Cookie: cookieHeader,
         },
     });
-    // console.log(applications);
+    const applications = (await res.json()).data as StandardResponse<IApplication[]>;
     return (
         <TemplateStandardPage>
             <AddApplicationForm />
-            <pre>{JSON.stringify(await applications.json(), null, 2)}</pre>
+            {/* <pre>{JSON.stringify(applications.data, null, 2)}</pre> */}
+            <ApplicationTable applications={applications.data || []} />
         </TemplateStandardPage>
     );
 };

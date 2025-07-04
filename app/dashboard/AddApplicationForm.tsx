@@ -17,14 +17,18 @@ const AddApplicationForm = () => {
             classNameTrigger="w-fit"
         >
             <div className="grid gap-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Label className="flex flex-col gap-2 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <Label className="flex flex-col gap-2 items-start col-span-2">
                         Titre de la candidature*
                         <Input name="title" type="text" placeholder="Titre de la candidature" required />
                     </Label>
-                    <Label className="flex flex-col gap-2 items-start">
+                    <Label className="flex flex-col gap-2 items-start col-span-2">
                         Nom de l'entreprise*
                         <Input name="company" type="text" placeholder="Nom de l'entreprise" required />
+                    </Label>
+                    <Label className="flex flex-col gap-2 items-start">
+                        Type de poste*
+                        <Input name="type" type="text" placeholder="Alternance / CDI / CDD / Mission" required />
                     </Label>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

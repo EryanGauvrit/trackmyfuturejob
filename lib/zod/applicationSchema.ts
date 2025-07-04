@@ -8,4 +8,5 @@ export const addApplicationSchema = z.object({
     link: z.string().url('URL invalide').optional(),
     location: z.string(),
     notes: z.string().max(500, 'Maximum 500 caractères').optional(),
+    type: z.string().min(1, 'Le type de candidature est requis'),
 });

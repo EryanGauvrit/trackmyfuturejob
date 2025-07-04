@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { ButtonVariants } from '@/types/variants';
 import { ChevronLeft } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Button } from '../../ui/button';
+import { Button } from '../ui/button';
 
 const ButtonBack = ({ className, message, variant }: { className?: string; message?: string; variant?: ButtonVariants }) => {
     const router = useRouter();

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import NotFound from './not-found';
 
 // Mock ButtonBack and next/link
-jest.mock('@/components/layout/buttons/ButtonBack', () => (props: any) => (
+jest.mock('@/components/buttons/ButtonBack', () => (props: any) => (
     <button data-testid="button-back" {...props}>
         {props.message}
     </button>

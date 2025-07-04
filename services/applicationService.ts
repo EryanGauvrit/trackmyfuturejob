@@ -3,9 +3,10 @@
 import prisma from '@/lib/prisma';
 import { wrapResponse } from '@/lib/wrapResponse';
 import { addApplicationSchema } from '@/lib/zod/applicationSchema';
+import { IApplication } from '@/types/application';
 import { isAuthenticated } from './authService';
 
-export const getApplications = wrapResponse(async () => {
+export const getApplications = wrapResponse(async (): Promise<IApplication[]> => {
     const user = await isAuthenticated(true);
 
     return await prisma.application.findMany({
@@ -29,6 +30,7 @@ export const getApplications = wrapResponse(async () => {
             link: true,
             location: true,
             notes: true,
+            type: true,
         },
     });
 });
@@ -53,6 +55,7 @@ export const addApplication = wrapResponse(async (body: FormData) => {
             link: data.link || null,
             location: data.location,
             notes: data.notes || null,
+            type: data.type,
         },
     });
 

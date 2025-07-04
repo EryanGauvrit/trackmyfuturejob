@@ -17,7 +17,7 @@ import { X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
-import ButtonSubmit from './ButtonSubmit';
+import ButtonSubmit from './buttons/ButtonSubmit';
 
 type DialogFormProps<T> = {
     title: string;

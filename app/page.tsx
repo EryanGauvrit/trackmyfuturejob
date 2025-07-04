@@ -1,5 +1,5 @@
 import logo from '@/assets/Logo.png';
-import TemplateStandardPage from '@/components/layout/TemplateStandardPage';
+import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
 import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter, CardHeader } from '@/components/ui/card';

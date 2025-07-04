@@ -12,7 +12,7 @@ const Home = async () => {
     const session = await getSession();
 
     return (
-        <TemplateStandardPage className="px-2">
+        <TemplateStandardPage>
             {session && session.user && (
                 <Alert className="max-w-2xl m-auto my-2 flex flex-wrap items-center justify-center sm:justify-between gap-4">
                     <AlertTitle className="text-xl font-bold flex items-center gap-2">

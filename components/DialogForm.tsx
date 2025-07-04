@@ -106,7 +106,10 @@ const DialogForm = <T,>({
                 <form
                     action={(formData) => {
                         actionFn(formData)
-                            .then(() => {
+                            .then((res: any) => {
+                                if (res && res.error) {
+                                    throw new Error(res.error);
+                                }
                                 toast.success(textSuccess || 'Opération réussie !');
                                 setIsOpen(false);
                                 router.refresh();

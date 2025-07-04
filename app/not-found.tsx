@@ -1,4 +1,4 @@
-import ButtonBack from '@/components/layout/ButtonBack';
+import ButtonBack from '@/components/layout/buttons/ButtonBack';
 import Link from 'next/link';
 
 export default function NotFound() {

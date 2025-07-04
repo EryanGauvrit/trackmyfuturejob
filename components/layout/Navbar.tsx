@@ -13,7 +13,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="w-full flex items-center grow px-4">
+        <nav className="w-full flex flex-col md:flex-row items-center grow pl-4">
             {pages.map((page) => (
                 <NavLink
                     key={page.name}

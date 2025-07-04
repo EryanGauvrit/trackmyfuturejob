@@ -63,6 +63,7 @@ const config: Config = {
         'app/sitemap.ts',
         'app/api/auth\\\\',
         'app/api/edgestore\\\\',
+        'next.config.ts',
     ],
 
     // Indicates which provider should be used to instrument code for coverage

@@ -93,7 +93,7 @@ const Page = () => {
                                 <Input type="password" id="password" name="password" placeholder="Votre mot de passe" required />
                             </div>
                             <ButtonSubmit isLoading={isLoading} type="submit">
-                                Créer un compte
+                                S'inscrire
                             </ButtonSubmit>
                         </div>
                         <div className="mt-4 text-center text-sm text-gray-500">

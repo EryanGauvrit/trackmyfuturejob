@@ -23,7 +23,7 @@ const page = async () => {
     const userData = response.data as User;
 
     return (
-        <TemplateStandardPage>
+        <TemplateStandardPage className="px-4">
             <h1 className="text-2xl font-bold uppercase flex items-center gap-2">
                 <UserCog size={26} />
                 Mon compte

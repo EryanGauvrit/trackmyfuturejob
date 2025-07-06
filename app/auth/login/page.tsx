@@ -1,6 +1,7 @@
 'use client';
 
 import GoogleIcon from '@/assets/google_icon.png';
+import LinkedinIcon from '@/assets/linkedin_icon.png';
 import ButtonSubmit from '@/components/buttons/ButtonSubmit';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -22,7 +23,7 @@ const Page = () => {
                     <CardDescription>Connectez-vous pour accéder à votre compte et profiter de toutes les fonctionnalités.</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="flex justify-center mb-4">
+                    <div className="flex justify-center gap-1 mb-4">
                         <ButtonSubmit
                             isLoading={isLoading}
                             type="button"
@@ -49,6 +50,30 @@ const Page = () => {
                         >
                             <Image src={GoogleIcon} alt="Google Icon" width={20} height={20} />
                             Google
+                        </ButtonSubmit>
+                        <ButtonSubmit
+                            isLoading={isLoading}
+                            type="button"
+                            variant="outline"
+                            onClick={() =>
+                                signIn.social({
+                                    provider: 'linkedin',
+                                    fetchOptions: {
+                                        onRequest: () => {
+                                            setIsLoading(true);
+                                        },
+                                        onResponse: () => {
+                                            setIsLoading(false);
+                                        },
+                                        onError: (ctx) => {
+                                            toast.error(ctx.error.message);
+                                        },
+                                    },
+                                })
+                            }
+                        >
+                            <Image src={LinkedinIcon} alt="LinkedIn Icon" width={20} height={20} />
+                            LinkedIn
                         </ButtonSubmit>
                     </div>
                     <form

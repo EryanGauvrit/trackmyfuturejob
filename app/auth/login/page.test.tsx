@@ -28,13 +28,18 @@ describe('Login Page', () => {
         jest.clearAllMocks();
     });
 
-    it('renders login form and Google button', () => {
+    it('renders login form', () => {
         render(<Page />);
         expect(screen.getByText(/Connexion/i)).toBeInTheDocument();
-        expect(screen.getByText(/Google/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Mot de passe/i)).toBeInTheDocument();
         expect(screen.getByText(/Se connecter/i)).toBeInTheDocument();
         expect(screen.getByText(/Créez-en un/i)).toBeInTheDocument();
+    });
+
+    it('renders social login buttons', () => {
+        render(<Page />);
+        expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /LinkedIn/i })).toBeInTheDocument();
     });
 });

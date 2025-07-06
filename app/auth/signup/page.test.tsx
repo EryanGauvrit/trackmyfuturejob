@@ -61,8 +61,13 @@ describe('Signup Page', () => {
         expect(screen.getByLabelText(/Nom d'utilisateur/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Email/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Mot de passe/i)).toBeInTheDocument();
-        expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
         expect(screen.getByRole('button', { name: /S'inscrire/i })).toBeInTheDocument();
         expect(screen.getByText(/Déjà un compte/i)).toBeInTheDocument();
+    });
+
+    it('renders social signup buttons', () => {
+        render(<Page />);
+        expect(screen.getByRole('button', { name: /Google/i })).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /LinkedIn/i })).toBeInTheDocument();
     });
 });

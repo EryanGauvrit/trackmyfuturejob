@@ -15,7 +15,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [data, pathName, router, isPending]);
 
-    return <>{children}</>;
+    return children;
 };
 
 export default AuthProvider;

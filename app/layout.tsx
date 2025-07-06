@@ -1,3 +1,4 @@
+import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import AuthProvider from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
@@ -27,12 +28,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fr" suppressHydrationWarning>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex-1`} suppressHydrationWarning>
+        <html lang="fr" suppressHydrationWarning className="h-full">
+            <body className={`h-full min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased flex-1`} suppressHydrationWarning>
                 <ThemeProvider attribute={'class'} defaultTheme="system" enableSystem disableTransitionOnChange themes={['light', 'dark']}>
                     <AuthProvider>
                         <Header />
                         {children}
+                        <Footer />
                         <Toaster />
                     </AuthProvider>
                 </ThemeProvider>

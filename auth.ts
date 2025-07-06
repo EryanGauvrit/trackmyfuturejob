@@ -22,5 +22,9 @@ export const auth = betterAuth({
             scope: ['profile', 'email'],
             redirectURI: `${Config.BETTER_AUTH_URL}/api/auth/callback/google`,
         },
+        linkedin: {
+            clientId: Config.LINKEDIN_CLIENT_ID,
+            clientSecret: Config.LINKEDIN_CLIENT_SECRET,
+        },
     },
 });

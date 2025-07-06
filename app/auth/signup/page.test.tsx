@@ -13,7 +13,7 @@ jest.mock('next/link', () => {
 jest.mock('@/assets/google_icon.png', () => 'google_icon.png');
 
 // Mock ButtonSubmit
-jest.mock('@/components/ButtonSubmit', () => (props: any) => (
+jest.mock('@/components/buttons/ButtonSubmit', () => (props: any) => (
     <button onClick={props.onClick} type={props.type} disabled={props.isLoading}>
         {props.children}
     </button>

@@ -19,7 +19,7 @@ jest.mock('lucide-react', () => ({
 }));
 
 // Mock all UI components
-jest.mock('@/components/layout/TemplateStandardPage', () => ({ children, ...props }: any) => (
+jest.mock('@/components/templates/TemplateStandardPage', () => ({ children, ...props }: any) => (
     <div data-testid="template-standard-page" {...props}>
         {children}
     </div>
@@ -67,6 +67,8 @@ jest.mock('@/components/ui/card', () => ({
     ),
 }));
 
+jest.mock('./AsideDemo', () => () => <div data-testid="aside-demo">Aside Demo</div>);
+
 // Mock getSession
 jest.mock('@/lib/auth-server', () => ({
     getSession: jest.fn(),
@@ -107,8 +109,7 @@ describe('Home page', () => {
         (getSession as jest.Mock).mockResolvedValueOnce(null);
         // @ts-ignore
         render(await Home());
-        // The aside is a div with className="w-full bg-amber-500"
-        expect(document.querySelector('.bg-amber-500')).toBeInTheDocument();
+        expect(screen.getByTestId('aside-demo')).toBeInTheDocument();
     });
 
     it('renders "Le concept" section', async () => {

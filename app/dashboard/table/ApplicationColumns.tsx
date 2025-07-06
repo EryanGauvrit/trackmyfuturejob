@@ -260,7 +260,7 @@ export const ApplicationColumns: ColumnDef<IApplication>[] = [
         cell: ({ row }) => {
             const application = row.original;
             return (
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 w-fit mx-auto">
                     <DialogForm
                         actionFn={updateApplication}
                         title={`Notes pour ${application.title} chez ${application.company}`}

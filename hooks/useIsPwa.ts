@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+import { useIsMobile } from './use-mobile';
 
 export function useIsPWA() {
     const [isPWA, setIsPWA] = useState(false);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -12,5 +14,5 @@ export function useIsPWA() {
         setIsPWA(matchStandalone || iosStandalone);
     }, []);
 
-    return isPWA;
+    return isMobile;
 }

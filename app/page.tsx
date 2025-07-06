@@ -1,5 +1,7 @@
+import desktopScreenshot from '@/assets/demo/desktop.webp';
+import desktopLightScreenshot from '@/assets/demo/desktop_light.webp';
 import logo from '@/assets/Logo.png';
-import TemplateStandardPage from '@/components/layout/TemplateStandardPage';
+import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
 import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
@@ -7,12 +9,13 @@ import { getSession } from '@/lib/auth-server';
 import { Info } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import AsideDemo from './AsideDemo';
 
 const Home = async () => {
     const session = await getSession();
 
     return (
-        <TemplateStandardPage className="px-2">
+        <TemplateStandardPage>
             {session && session.user && (
                 <Alert className="max-w-2xl m-auto my-2 flex flex-wrap items-center justify-center sm:justify-between gap-4">
                     <AlertTitle className="text-xl font-bold flex items-center gap-2">
@@ -24,8 +27,8 @@ const Home = async () => {
                     </Button>
                 </Alert>
             )}
-            <section className="flex flex-col-reverse md:flex-row justify-center gap-4 mb-8 w-full">
-                <Card className="w-full">
+            <section className="flex flex-col justify-center gap-4 w-full items-center xl:grid xl:grid-cols-2">
+                <Card className="w-full h-fit">
                     <CardHeader>
                         <h2 className="text-2xl font-bold flex items-center flex-wrap">
                             Bienvenue sur
@@ -52,8 +55,24 @@ const Home = async () => {
                         </CardAction>
                     </CardFooter>
                 </Card>
-                <aside className="w-full bg-amber-500"></aside>
+                <AsideDemo />
             </section>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8 place-items-center md:h-[350px]">
+                <Image
+                    src={desktopScreenshot}
+                    alt="Application sur desktop en mode sombre"
+                    width={1200}
+                    height={600}
+                    className="rounded-lg h-full object-cover object-left m-auto"
+                />
+                <Image
+                    src={desktopLightScreenshot}
+                    alt="Application sur desktop en mode clair"
+                    width={1200}
+                    height={600}
+                    className="rounded-lg h-full object-cover object-left m-auto"
+                />
+            </div>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
                 <Card>
                     <CardHeader>

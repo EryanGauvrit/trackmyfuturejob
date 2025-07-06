@@ -1,6 +1,5 @@
 'use client';
 
-import Loader from '@/components/Loader';
 import { useSession } from '@/lib/auth-client';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';

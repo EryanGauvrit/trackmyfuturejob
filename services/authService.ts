@@ -6,7 +6,7 @@ export const isAuthenticated = async (throwError = false) => {
     const session = await getSession();
 
     if (!session?.user && throwError) {
-        throw new Error('Accès refusé : vous devez être connecté pour accéder à cette page.');
+        throw new Error('Accès refusé : vous devez être connecté pour accéder à cette ressource.');
     }
 
     return session?.user ?? null;

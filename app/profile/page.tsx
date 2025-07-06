@@ -1,5 +1,5 @@
 import ConfirmDialog from '@/components/ConfirmDialog';
-import TemplateStandardPage from '@/components/layout/TemplateStandardPage';
+import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
 import { Card } from '@/components/ui/card';
 import { User } from '@/generated/prisma';
 import { getSession } from '@/lib/auth-server';

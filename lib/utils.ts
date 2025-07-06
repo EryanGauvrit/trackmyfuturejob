@@ -5,12 +5,24 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
 }
 
-export const removeZeroAtStart = (value: string) => {
-    if (value.startsWith('0') && value.length > 1 && value[1] !== '.') {
-        console.log('value', value);
-        const res = value.replace(/^0+/, '');
-        console.log('res', res);
-        return res;
+export const toCapitalize = (str: string): string => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+};
+
+export type SimpleType = 'boolean' | 'string' | 'number' | 'date' | undefined | null;
+
+export const getSimpleType = (value: unknown): SimpleType => {
+    if (typeof value === 'boolean') {
+        return 'boolean';
     }
-    return value;
+    if (typeof value === 'string') {
+        return 'string';
+    }
+    if (typeof value === 'number') {
+        return 'number';
+    }
+    if (value instanceof Date) {
+        return 'date';
+    }
+    return undefined;
 };

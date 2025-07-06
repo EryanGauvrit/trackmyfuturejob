@@ -6,9 +6,10 @@ model Application {
     address         String?
     status          String
     link            String?
-    notes           String?
+    notes           String?  @db.Text
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
+    type            String
 
     interviews      Interview[]
     userId          String

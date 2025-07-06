@@ -1,6 +1,6 @@
 'use client'; // Error boundaries must be Client Components
 
-import ButtonBack from '@/components/layout/buttons/ButtonBack';
+import ButtonBack from '@/components/buttons/ButtonBack';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { Home, RotateCcw } from 'lucide-react';

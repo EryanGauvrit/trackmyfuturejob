@@ -13,8 +13,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import ButtonSubmit from '../ButtonSubmit';
 import { ButtonSizes, ButtonVariants } from '@/types/variants';
+import ButtonSubmit from '../buttons/ButtonSubmit';
 
 type AlertDialogCompProps = {
     title: string;

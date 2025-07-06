@@ -1,5 +1,7 @@
 import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
+import InstallBanner from '@/components/layout/InstallBanner';
+import { Config } from '@/config';
 import AuthProvider from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { Analytics } from '@vercel/analytics/next';
@@ -29,15 +31,19 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fr" suppressHydrationWarning className="h-full">
-            <body className={`h-full min-h-screen ${geistSans.variable} ${geistMono.variable} antialiased flex-1`} suppressHydrationWarning>
+        <html lang="fr" suppressHydrationWarning className="flex flex-col">
+            <body
+                className={`h-full min-h-screen flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased flex-1 relative`}
+                suppressHydrationWarning
+            >
                 <ThemeProvider attribute={'class'} defaultTheme="system" enableSystem disableTransitionOnChange themes={['light', 'dark']}>
                     <AuthProvider>
                         <Header />
+                        <InstallBanner />
                         {children}
                         <Footer />
                         <Toaster />
-                        <Analytics />
+                        {Config.STAGE === 'prod' && <Analytics />}
                     </AuthProvider>
                 </ThemeProvider>
             </body>

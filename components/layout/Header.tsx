@@ -2,23 +2,27 @@
 
 import logo from '@/assets/Logo.png';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsPWA } from '@/hooks/useIsPwa';
 import { signOut, useSession } from '@/lib/auth-client';
+import { cn } from '@/lib/utils';
+import { LogOut } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
+import ButtonBurger from '../buttons/ButtonBurger';
 import ButtonSubmit from '../buttons/ButtonSubmit';
 import { Button } from '../ui/button';
 import Navbar from './Navbar';
-import ButtonBurger from '../buttons/ButtonBurger';
-import dynamic from 'next/dynamic';
 
 const ButtonSwithTheme = dynamic(() => import('../buttons/ButtonSwithTheme').then((m) => m.default), {
     ssr: false,
 });
 
 const Header = () => {
+    const isPWA = useIsPWA();
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const { data } = useSession();
@@ -51,7 +55,10 @@ const Header = () => {
     return (
         <header
             ref={headerRef}
-            className="w-full py-3 md:p-5 bg-card border-border border-b-2 flex flex-col md:flex-row items-center justify-between md:items-end gap-5"
+            className={cn(
+                'w-full py-3 md:p-5 bg-card border-border border-b-2 flex flex-col md:flex-row items-center justify-between md:items-end gap-5',
+                isPWA ? 'flex-row sticky top-0 left-0 z-40' : '',
+            )}
         >
             <div className="flex justify-between md:justify-around items-center w-full md:w-auto px-5 md:pl-2 md:pr-5 xl:pr-10">
                 <Link href="/" className="flex items-center gap-2 w-fit text-nowrap">
@@ -65,7 +72,7 @@ const Header = () => {
                     />
                     <h1 className="md:text-2xl font-bold">TrackMyFutureJob</h1>
                 </Link>
-                <div className="flex flex-row-reverse items-center md:hidden">
+                <div className={cn('flex flex-row-reverse items-center md:hidden', isPWA ? 'hidden' : '')}>
                     <ButtonBurger
                         className=" hover:bg-transparent bg-transparent"
                         size={'lg'}
@@ -77,16 +84,16 @@ const Header = () => {
                     <ButtonSwithTheme />
                 </div>
             </div>
-            {(isMenuOpen || !isMobile) && (
+            {(isMenuOpen || !isMobile || isPWA) && (
                 <>
-                    {data && <Navbar />}
-                    <div className="flex items-center gap-1.5">
-                        <ButtonSwithTheme className="hidden md:block" />
+                    {data && !isPWA && <Navbar />}
+                    <div className={cn('flex items-center gap-1.5', isPWA ? 'pr-5' : '')}>
+                        <ButtonSwithTheme className={cn('hidden md:block', isPWA ? 'block' : '')} size={isPWA ? 'xs_icon' : undefined} />
                         {data ? (
                             <ButtonSubmit
                                 isLoading={isLoading}
                                 variant={'destructive'}
-                                size={'sm'}
+                                size={isPWA ? 'xs_icon' : 'sm'}
                                 onClick={async () => {
                                     await signOut({
                                         fetchOptions: {
@@ -107,10 +114,10 @@ const Header = () => {
                                     });
                                 }}
                             >
-                                Se déconnecter
+                                {isPWA ? <LogOut /> : 'Se déconnecter'}
                             </ButtonSubmit>
                         ) : (
-                            <div className="flex items-center gap-2">
+                            <div className={cn('flex items-center gap-2', isPWA ? 'hidden' : '')}>
                                 <Button variant={'ghost'} asChild>
                                     <Link href="/auth/login">Se connecter</Link>
                                 </Button>

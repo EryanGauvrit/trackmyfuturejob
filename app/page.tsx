@@ -50,7 +50,7 @@ const Home = async () => {
                     <CardFooter>
                         <CardAction>
                             <Button asChild size={'lg'}>
-                                <Link href={'/auth/signin'}>👉 Commencer maintenant !</Link>
+                                <Link href={'/auth/login'}>👉 Commencer maintenant !</Link>
                             </Button>
                         </CardAction>
                     </CardFooter>
@@ -64,6 +64,7 @@ const Home = async () => {
                     width={1200}
                     height={600}
                     className="rounded-lg h-full object-cover object-left m-auto"
+                    priority
                 />
                 <Image
                     src={desktopLightScreenshot}
@@ -71,6 +72,7 @@ const Home = async () => {
                     width={1200}
                     height={600}
                     className="rounded-lg h-full object-cover object-left m-auto"
+                    priority
                 />
             </div>
             <section className="grid grid-cols-1 md:grid-cols-3 gap-4 my-8">
@@ -113,7 +115,7 @@ const Home = async () => {
                     <CardFooter className="mt-auto">
                         <CardAction>
                             <Button asChild size={'lg'}>
-                                <Link href={'/auth/signin'}>🔥Connectez-vous pour commencer !</Link>
+                                <Link href={'/auth/login'}>🔥Connectez-vous pour commencer !</Link>
                             </Button>
                         </CardAction>
                     </CardFooter>

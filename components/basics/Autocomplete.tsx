@@ -1,9 +1,8 @@
-import React from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
 import { Check, ChevronsUpDown } from 'lucide-react';
+import { Button } from '../ui/button';
+import { Command, CommandGroup, CommandInput, CommandItem, CommandList } from '../ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 type AutocompleteProps = {
     placeholder?: string;
@@ -14,7 +13,7 @@ type AutocompleteProps = {
     onSelect: (value: number | string) => void;
 };
 
-const Autocomplete = ({ classNameContent, className, data, onSelect, placeholder = 'Select an option', value }: AutocompleteProps) => {
+const Autocomplete = ({ classNameContent, className, data, onSelect, placeholder = 'Sélectionner', value }: AutocompleteProps) => {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -39,7 +38,7 @@ const Autocomplete = ({ classNameContent, className, data, onSelect, placeholder
                                     onSelect('');
                                 }}
                             >
-                                All
+                                Tous
                                 <Check className={cn('ml-auto', !value ? 'opacity-100' : 'opacity-0')} />
                             </CommandItem>
                             {data.map(

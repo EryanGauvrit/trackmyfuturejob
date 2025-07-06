@@ -1,6 +1,6 @@
 'use client';
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useScreenSizes } from '@/hooks/useScreenSizes';
 import { getCommonPinningStyles } from '@/lib/table-utils';
 import { cn } from '@/lib/utils';
@@ -86,29 +86,12 @@ export function TemplateTable<TData, TValue>({
         <div className={cn('w-full grid grid-cols-1 h-full text-card-foreground overflow-auto', className)} style={{ maxHeight }}>
             <div className={'px-5 flex flex-1 gap-10 items-center bg-background sticky z-15 left-0 top-0 py-2 h-fit'}>
                 {title && (
-                    <h2 className="text-2xl flex gap-2 items-center">
+                    <h2 className="text-xl md:text-2xl flex gap-2 items-center">
                         {icon}
                         {title} <span className="text-lg">({totalRows || 0})</span>
                     </h2>
                 )}
                 {tableAction && tableAction}
-                {customPagination ?? (
-                    <div className="flex flex-col items-end grow">
-                        {needPagination && totalPages && (
-                            <DataTablePagination totalPages={totalPages} totalRows={totalRows} pageSizes={pageSizes} />
-                        )}
-                        {clientPagination && (
-                            <DataTablePaginationClient
-                                table={table}
-                                pageSizes={pageSizes}
-                                disableNextPage={disableNextPage}
-                                onNextPage={onNextPage}
-                                onLimitChange={onLimitChange}
-                            />
-                        )}
-                        {actionMessage && actionMessage}
-                    </div>
-                )}
             </div>
             <DndContext
                 collisionDetection={closestCenter}
@@ -183,7 +166,7 @@ export function TemplateTable<TData, TValue>({
                                         <TableCell colSpan={table.getAllColumns().length}>
                                             <Alert className="max-w-md mx-auto text-wrap">
                                                 <CircleAlert />
-                                                <AlertTitle>{notFoundMessage || `No ${labelItemFound || 'items'} found`}</AlertTitle>
+                                                <AlertTitle>{notFoundMessage || `Aucun ${labelItemFound || 'items'} found`}</AlertTitle>
                                             </Alert>
                                         </TableCell>
                                     </TableRow>
@@ -191,13 +174,29 @@ export function TemplateTable<TData, TValue>({
                             </>
                         )}
                     </TableBody>
-                    {/* <TableFooter className="sticky bottom-0 z-10 bg-secondary border-none">
+                    <TableFooter className="sticky bottom-0 z-10 bg-secondary border-none">
                         <TableRow>
                             <TableCell colSpan={table.getAllColumns().length} className="relative p-0 border-none">
-                               
+                                {customPagination ?? (
+                                    <div className="flex flex-col items-end grow">
+                                        {needPagination && totalPages && (
+                                            <DataTablePagination totalPages={totalPages} totalRows={totalRows} pageSizes={pageSizes} />
+                                        )}
+                                        {clientPagination && (
+                                            <DataTablePaginationClient
+                                                table={table}
+                                                pageSizes={pageSizes}
+                                                disableNextPage={disableNextPage}
+                                                onNextPage={onNextPage}
+                                                onLimitChange={onLimitChange}
+                                            />
+                                        )}
+                                        {actionMessage && actionMessage}
+                                    </div>
+                                )}
                             </TableCell>
                         </TableRow>
-                    </TableFooter> */}
+                    </TableFooter>
                 </Table>
             </DndContext>
         </div>

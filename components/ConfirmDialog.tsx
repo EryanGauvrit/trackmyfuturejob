@@ -86,7 +86,7 @@ const ConfirmDialog = ({
                 className={cn(className)}
                 tooltip={tooltip}
             />
-            {isLoading && <Loader />}
+            {isLoading && <Loader inComponent className="w-5 h-5" />}
         </>
     );
 };

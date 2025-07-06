@@ -25,6 +25,7 @@ const ActionTableHeader = <TData, TValue>({
         <div className="flex flex-col h-full">
             <div className={cn('flex', className)}>
                 <Button
+                    className={column.getCanHide() ? '' : 'hidden'}
                     variant={'ghost'}
                     onClick={() => {
                         column.toggleVisibility(false);

@@ -37,7 +37,7 @@ export function RangeDateInput({ className, variant = 'outline', date, setDate }
                                 format(date.from, 'LLL dd, y')
                             )
                         ) : (
-                            <span className="text-muted-foreground">Pick a date</span>
+                            <span className="text-muted-foreground">Choisir une date</span>
                         )}
                     </Button>
                 </PopoverTrigger>

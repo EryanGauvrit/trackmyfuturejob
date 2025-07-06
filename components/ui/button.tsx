@@ -36,7 +36,7 @@ const buttonVariants = cva(
 
 export type ButtonProps = React.ComponentProps<'button'> &
     VariantProps<typeof buttonVariants> & {
-        tooltip?: string;
+        tooltip?: React.ReactNode;
         tooltipSide?: 'top' | 'right' | 'bottom' | 'left';
         asChild?: boolean;
     };

@@ -21,7 +21,7 @@ import ButtonSubmit from './buttons/ButtonSubmit';
 
 type DialogFormProps<T> = {
     title: string;
-    description: string;
+    description: React.ReactNode;
     textSubmit: React.ReactNode;
     textOpen: React.ReactNode;
     children: React.ReactNode;
@@ -35,7 +35,6 @@ type DialogFormProps<T> = {
     textSuccess?: string;
     classNameForm?: string;
     tooltip?: string;
-    isSettingsMode?: boolean;
     redirect?: string;
 };
 
@@ -88,10 +87,29 @@ const DialogForm = <T,>({
                     tooltip={tooltip}
                 >
                     {textOpen}
-                    {size === 'icon' && <span className="sr-only">Ouvrir le formulaire</span>}
+                    {size === 'icon' || (size === 'xs_icon' && <span className="sr-only">Ouvrir le formulaire</span>)}
                 </Button>
             </DialogTrigger>
-            <DialogContent className={cn(`max-w-4xl max-h-[95vh] overflow-auto`, className)} defaultCancelButton={false}>
+            <DialogContent
+                className={cn(`max-w-4xl max-h-[95vh] overflow-auto`, className)}
+                defaultCancelButton={false}
+                onCloseAutoFocus={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                }}
+                onInteractOutside={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                }}
+                onPointerDownOutside={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                }}
+                onEscapeKeyDown={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                }}
+            >
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>
                     <DialogDescription>{description}</DialogDescription>

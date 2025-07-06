@@ -76,9 +76,9 @@ function Filter({ column }: { column: Column<any, unknown> }) {
                         <SelectValue placeholder="Select" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="all">All</SelectItem>
-                        <SelectItem value="true">Yes</SelectItem>
-                        <SelectItem value="false">No</SelectItem>
+                        <SelectItem value="all">Tous</SelectItem>
+                        <SelectItem value="true">Oui</SelectItem>
+                        <SelectItem value="false">Non</SelectItem>
                     </SelectContent>
                 </Select>
             );

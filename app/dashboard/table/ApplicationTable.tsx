@@ -17,6 +17,7 @@ import {
     useReactTable,
     VisibilityState,
 } from '@tanstack/react-table';
+import { Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { ApplicationColumns } from './ApplicationColumns';
 
@@ -88,12 +89,15 @@ const ApplicationTable = ({ applications }: { applications: IApplication[] }) =>
 
     return (
         <TemplateTable
+            clientPagination={applications.length > 30}
             table={table}
             data={applications}
             totalRows={applications.length}
             title="Suivi de mes candidatures"
             maxHeight="100%"
             tableHeaderHeight="auto"
+            notFoundMessage="Aucune candidature trouvée"
+            icon={<Zap />}
         />
     );
 };

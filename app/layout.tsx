@@ -2,6 +2,7 @@ import Footer from '@/components/layout/Footer';
 import Header from '@/components/layout/Header';
 import AuthProvider from '@/providers/AuthProvider';
 import { ThemeProvider } from '@/providers/ThemeProvider';
+import { Analytics } from '@vercel/analytics/next';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { Toaster } from 'sonner';
@@ -36,6 +37,7 @@ export default function RootLayout({
                         {children}
                         <Footer />
                         <Toaster />
+                        <Analytics />
                     </AuthProvider>
                 </ThemeProvider>
             </body>

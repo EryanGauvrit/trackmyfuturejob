@@ -15,7 +15,7 @@ import { toast } from 'sonner';
 const Page = () => {
     const [isLoading, setIsLoading] = useState(false);
     return (
-        <main className="container mx-auto mt-10">
+        <main className="container mx-auto mt-10 flex-1">
             <Card className="max-w-md mx-auto">
                 <CardHeader>
                     <CardTitle className="text-center text-2xl font-bold">Créer un compte</CardTitle>

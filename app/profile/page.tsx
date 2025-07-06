@@ -1,10 +1,8 @@
 import ConfirmDialog from '@/components/ConfirmDialog';
-import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
 import { Card } from '@/components/ui/card';
 import { User } from '@/generated/prisma';
 import { getSession } from '@/lib/auth-server';
 import { deleteUser, getConnectedUser } from '@/services/userService';
-import { UserCog } from 'lucide-react';
 import { notFound, redirect } from 'next/navigation';
 import PersonnalInformations from './PersonnalInformations';
 
@@ -23,12 +21,7 @@ const page = async () => {
     const userData = response.data as User;
 
     return (
-        <TemplateStandardPage className="px-4">
-            <h1 className="text-2xl font-bold uppercase flex items-center gap-2">
-                <UserCog size={26} />
-                Mon compte
-            </h1>
-            <p>Bienvenue sur votre espace personnel, vous pouvez ici consulter et modifier vos informations personnelles.</p>
+        <>
             <PersonnalInformations user={userData} userSession={user} />
             <Card className="my-4 p-6 max-w-md mx-auto bg-transparent border-destructive flex flex-col justify-center gap-2">
                 <p>
@@ -48,7 +41,7 @@ const page = async () => {
                     isAccountDelete
                 />
             </Card>
-        </TemplateStandardPage>
+        </>
     );
 };
 

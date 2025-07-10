@@ -80,13 +80,15 @@ const ConfirmDialog = ({
                 }}
                 closeLabel="Annuler"
                 confirmLabel="Confirmer"
-                openLabel={openLabel ?? <Trash size={size === 'xs_icon' ? 18 : 20} />}
+                openLabel={
+                    isLoading ? <Loader inComponent className="w-5 h-5" /> : openLabel ?? <Trash size={size === 'xs_icon' ? 18 : 20} />
+                }
                 size={size ?? 'icon'}
                 variant={variant ?? 'destructive'}
                 className={cn(className)}
                 tooltip={tooltip}
+                disabled={isLoading}
             />
-            {isLoading && <Loader inComponent className="w-5 h-5" />}
         </>
     );
 };

@@ -11,6 +11,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { ButtonSizes, ButtonVariants } from '@/types/variants';
 import { X } from 'lucide-react';
@@ -18,12 +19,14 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import ButtonSubmit from './buttons/ButtonSubmit';
+import DisplayValueUpdateTrigger from './DisplayValueUpdateTrigger';
 
 type DialogFormProps<T> = {
     title: string;
     description: React.ReactNode;
     textSubmit: React.ReactNode;
     textOpen: React.ReactNode;
+    trigger?: React.ReactNode;
     children: React.ReactNode;
     variant?: ButtonVariants;
     size?: ButtonSizes;
@@ -54,10 +57,12 @@ const DialogForm = <T,>({
     textSuccess,
     tooltip,
     classNameForm,
+    trigger,
 }: DialogFormProps<T>) => {
     const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const isMounted = useRef(false);
+    const isMobile = useIsMobile();
 
     useEffect(() => {
         isMounted.current = true;
@@ -72,24 +77,43 @@ const DialogForm = <T,>({
 
     return (
         <Dialog open={isOpen}>
-            <DialogTrigger
-                asChild
-                onClick={(e) => {
-                    e.preventDefault();
-                    setIsOpen(true);
-                }}
-            >
-                <Button
-                    variant={variant}
-                    size={size}
-                    style={{ opacity: opacityTrigger + '%' }}
-                    className={cn(classNameTrigger)}
-                    tooltip={tooltip}
-                >
-                    {textOpen}
-                    {size === 'icon' || (size === 'xs_icon' && <span className="sr-only">Ouvrir le formulaire</span>)}
-                </Button>
-            </DialogTrigger>
+            <DisplayValueUpdateTrigger>
+                {trigger && (
+                    <DialogTrigger
+                        className="cursor-pointer"
+                        asChild
+                        onClick={(e) => {
+                            e.preventDefault();
+                        }}
+                        onDoubleClick={(e) => {
+                            e.preventDefault();
+                            setIsOpen(true);
+                        }}
+                    >
+                        {trigger}
+                    </DialogTrigger>
+                )}
+                {((!isMobile && trigger) || !trigger) && (
+                    <DialogTrigger
+                        asChild
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsOpen(true);
+                        }}
+                    >
+                        <Button
+                            variant={variant}
+                            size={size}
+                            style={{ opacity: opacityTrigger + '%' }}
+                            className={cn(classNameTrigger)}
+                            tooltip={tooltip}
+                        >
+                            {textOpen}
+                            {size === 'icon' || (size === 'xs_icon' && <span className="sr-only">Ouvrir le formulaire</span>)}
+                        </Button>
+                    </DialogTrigger>
+                )}
+            </DisplayValueUpdateTrigger>
             <DialogContent
                 className={cn(`max-w-4xl max-h-[95vh] overflow-auto`, className)}
                 defaultCancelButton={false}
@@ -141,7 +165,9 @@ const DialogForm = <T,>({
                     <div className="h-full max-h-max overflow-auto p-2 rounded-md w-full">{children}</div>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <ButtonSubmit type="submit">{textSubmit}</ButtonSubmit>
+                            <ButtonSubmit type="submit" className="mx-0">
+                                {textSubmit}
+                            </ButtonSubmit>
                         </DialogClose>
                     </DialogFooter>
                 </form>

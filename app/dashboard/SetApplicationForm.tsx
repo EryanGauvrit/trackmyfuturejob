@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { addApplication } from '@/services/applicationService';
 
-const AddApplicationForm = () => {
+const SetApplicationForm = () => {
     return (
         <DialogForm
             actionFn={addApplication}
@@ -58,4 +58,4 @@ const AddApplicationForm = () => {
     );
 };
 
-export default AddApplicationForm;
+export default SetApplicationForm;

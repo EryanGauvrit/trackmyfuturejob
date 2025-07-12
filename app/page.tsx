@@ -9,24 +9,15 @@ import { getSession } from '@/lib/auth-server';
 import { Info } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import AsideDemo from './AsideDemo';
 
-const Home = async () => {
-    const session = await getSession();
-
+const Home = () => {
     return (
         <TemplateStandardPage>
-            {session && session.user && (
-                <Alert className="max-w-2xl m-auto my-2 flex flex-wrap items-center justify-center sm:justify-between gap-4">
-                    <AlertTitle className="text-xl font-bold flex items-center gap-2">
-                        <Info />
-                        Salut {session.user.name} ! 👋
-                    </AlertTitle>
-                    <Button asChild variant={'secondary'} size={'lg'}>
-                        <Link href={'/dashboard'}>Accéder au tableau de bord</Link>
-                    </Button>
-                </Alert>
-            )}
+            <Suspense>
+                <SessionBanner />
+            </Suspense>
             <section className="flex flex-col justify-center gap-4 w-full items-center xl:grid xl:grid-cols-2">
                 <Card className="w-full h-fit">
                     <CardHeader>
@@ -144,6 +135,24 @@ const Home = async () => {
                 </Card>
             </section>
         </TemplateStandardPage>
+    );
+};
+
+const SessionBanner = async () => {
+    const session = await getSession();
+
+    if (!session) return null;
+
+    return (
+        <Alert className="max-w-2xl m-auto my-2 flex flex-wrap items-center justify-center sm:justify-between gap-4">
+            <AlertTitle className="text-xl font-bold flex items-center gap-2">
+                <Info />
+                Salut {session.user.name} ! 👋
+            </AlertTitle>
+            <Button asChild variant={'secondary'} size={'lg'}>
+                <Link href={'/dashboard'}>Accéder au tableau de bord</Link>
+            </Button>
+        </Alert>
     );
 };
 

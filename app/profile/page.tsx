@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card';
 import { User } from '@/generated/prisma';
 import { getSession } from '@/lib/auth-server';
 import { deleteUser, getConnectedUser } from '@/services/userService';
+import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 import PersonnalInformations from './PersonnalInformations';
 
@@ -41,6 +42,13 @@ const page = async () => {
                     isAccountDelete
                 />
             </Card>
+            <p className="text-center text-sm text-muted-foreground">
+                Une question, une suggestion ou un problème ? N'hésitez pas à{' '}
+                <Link className="text-secondary hover:underline" href={'/contact'}>
+                    nous contacter via le formulaire de contact
+                </Link>
+                .
+            </p>
         </>
     );
 };

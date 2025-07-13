@@ -2,31 +2,20 @@ import desktopScreenshot from '@/assets/demo/desktop.webp';
 import desktopLightScreenshot from '@/assets/demo/desktop_light.webp';
 import logo from '@/assets/Logo.png';
 import TemplateStandardPage from '@/components/templates/TemplateStandardPage';
-import { Alert, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardAction, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { getSession } from '@/lib/auth-server';
-import { Info } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import SessionBanner from './_components/SessionBanner';
 import AsideDemo from './AsideDemo';
 
-const Home = async () => {
-    const session = await getSession();
-
+const Home = () => {
     return (
         <TemplateStandardPage>
-            {session && session.user && (
-                <Alert className="max-w-2xl m-auto my-2 flex flex-wrap items-center justify-center sm:justify-between gap-4">
-                    <AlertTitle className="text-xl font-bold flex items-center gap-2">
-                        <Info />
-                        Salut {session.user.name} ! 👋
-                    </AlertTitle>
-                    <Button asChild variant={'secondary'} size={'lg'}>
-                        <Link href={'/dashboard'}>Accéder au tableau de bord</Link>
-                    </Button>
-                </Alert>
-            )}
+            <Suspense>
+                <SessionBanner />
+            </Suspense>
             <section className="flex flex-col justify-center gap-4 w-full items-center xl:grid xl:grid-cols-2">
                 <Card className="w-full h-fit">
                     <CardHeader>

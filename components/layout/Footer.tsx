@@ -1,10 +1,10 @@
 'use client';
 
+import { useIsPWA } from '@/hooks/useIsPwa';
 import { useSession } from '@/lib/auth-client';
 import { House, LogIn, User, Zap } from 'lucide-react';
 import Link from 'next/link';
 import NavLink from '../NavLink';
-import { useIsPWA } from '@/hooks/useIsPwa';
 
 const Footer = () => {
     const isPWA = useIsPWA();
@@ -41,11 +41,15 @@ const Footer = () => {
                     )}
                 </nav>
             ) : (
-                <div className="container mx-auto  text-center py-4">
+                <div className="container mx-auto text-center py-4">
                     <p className="text-gray-600 text-sm">
                         &copy; {new Date().getFullYear()} TrackMyFutureJob. Tous droits réservés.
-                        <Link href={'/legal/policy'} className="text-secondary hover:underline ml-2">
+                        <Link href={'/legal/policy'} className="text-secondary hover:underline mx-2">
                             Politique de confidentialité
+                        </Link>
+                        -
+                        <Link href={'/contact'} className="text-secondary hover:underline ml-2">
+                            Nous contacter
                         </Link>
                     </p>
                 </div>

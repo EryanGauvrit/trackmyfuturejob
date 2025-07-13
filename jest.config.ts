@@ -59,11 +59,12 @@ const config: Config = {
         'lib/resend.ts',
         'components/ui\\\\',
         'app/manifest.ts',
-        'app/robots.ts',
+        'app/robot.ts',
         'app/sitemap.ts',
         'app/api/auth\\\\',
         'app/api/edgestore\\\\',
         'next.config.ts',
+        'config.ts',
     ],
 
     // Indicates which provider should be used to instrument code for coverage

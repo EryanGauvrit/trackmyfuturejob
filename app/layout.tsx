@@ -21,8 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'TrackMyFutureJob',
-    description: 'TrackMyFutureJob',
+    title: "TrackMyFutureJob - Suivi de candidatures pour chercheurs d'emploi",
+    description:
+        "TrackMyFutureJob est un outil de suivi de candidatures pour les chercheurs d'emploi. Il permet de suivre le processus de candidature, gérer ses contacts et d'organiser ses recherches d'emploi.",
 };
 
 export default function RootLayout({

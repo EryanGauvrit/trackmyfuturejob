@@ -1,29 +1,20 @@
-import { getSession } from '@/lib/auth-server';
+import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import Home from './page';
 
-// Mock next/image
-jest.mock('next/image', () => (props: any) => <img {...props} />);
-
-// Mock next/link
+// Mocks for next/image and next/link
+jest.mock('next/image', () => ({ priority, ...props }: any) => <img {...props} />);
 jest.mock('next/link', () => {
     return ({ children, href }: any) => <a href={href}>{children}</a>;
 });
 
-// Mock logo import
-jest.mock('@/assets/Logo.png', () => 'logo.png');
+// Mock assets
+jest.mock('@/assets/demo/desktop.webp', () => 'desktop.webp');
+jest.mock('@/assets/demo/desktop_light.webp', () => 'desktop_light.webp');
+jest.mock('@/assets/Logo.png', () => 'Logo.png');
 
-// Mock lucide-react Info icon
-jest.mock('lucide-react', () => ({
-    Info: () => <svg data-testid="info-icon" />,
-}));
-
-// Mock all UI components
-jest.mock('@/components/templates/TemplateStandardPage', () => ({ children, ...props }: any) => (
-    <div data-testid="template-standard-page" {...props}>
-        {children}
-    </div>
-));
+// Mock components
+jest.mock('@/components/templates/TemplateStandardPage', () => ({ children }: any) => <div data-testid="template">{children}</div>);
 jest.mock('@/components/ui/alert', () => ({
     Alert: ({ children, ...props }: any) => (
         <div data-testid="alert" {...props}>
@@ -35,9 +26,6 @@ jest.mock('@/components/ui/alert', () => ({
             {children}
         </div>
     ),
-}));
-jest.mock('@/components/ui/button', () => ({
-    Button: ({ children, ...props }: any) => <button>{children}</button>,
 }));
 jest.mock('@/components/ui/card', () => ({
     Card: ({ children, ...props }: any) => (
@@ -66,12 +54,29 @@ jest.mock('@/components/ui/card', () => ({
         </div>
     ),
 }));
-
-jest.mock('./AsideDemo', () => () => <div data-testid="aside-demo">Aside Demo</div>);
+jest.mock('@/components/ui/alert', () => ({
+    Alert: ({ children, ...props }: any) => (
+        <div data-testid="alert" {...props}>
+            {children}
+        </div>
+    ),
+    AlertTitle: ({ children, ...props }: any) => (
+        <div data-testid="alert-title" {...props}>
+            {children}
+        </div>
+    ),
+}));
+jest.mock('lucide-react', () => ({
+    Info: () => <svg data-testid="info-icon" />,
+}));
+jest.mock('./AsideDemo', () => () => <aside data-testid="aside-demo" />);
+// Mock SessionBanner
+jest.mock('./_components/SessionBanner', () => () => <div data-testid="session-banner">Session Banner</div>);
 
 // Mock getSession
+const mockGetSession = jest.fn();
 jest.mock('@/lib/auth-server', () => ({
-    getSession: jest.fn(),
+    getSession: () => mockGetSession(),
 }));
 
 describe('Home page', () => {
@@ -79,60 +84,52 @@ describe('Home page', () => {
         jest.clearAllMocks();
     });
 
-    it('renders without crashing (no session)', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
-        expect(screen.getByTestId('template-standard-page')).toBeInTheDocument();
-    });
+    it('renders the main sections and cards', async () => {
+        mockGetSession.mockResolvedValue(null);
 
-    it('renders alert with user name when session exists', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce({ user: { name: 'Alice' } });
-        // @ts-ignore
-        render(await Home());
-        expect(screen.getByTestId('alert')).toBeInTheDocument();
-        expect(screen.getByTestId('alert-title')).toHaveTextContent('Salut Alice');
-        expect(screen.getByRole('link', { name: /Accéder au tableau de bord/i })).toBeInTheDocument();
-    });
+        render(<Home />);
 
-    it('renders welcome section with logo', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
-        expect(screen.getAllByTestId('card')[0]).toBeInTheDocument();
-        expect(screen.getByAltText('Logo TrackMyFutureJob')).toBeInTheDocument();
-        expect(screen.getByText(/Bienvenue sur/i)).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /Commencer maintenant/i })).toBeInTheDocument();
-    });
+        // Template wrapper
+        expect(screen.getByTestId('template')).toBeInTheDocument();
 
-    it('renders aside section', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
+        // Welcome card
+        expect(screen.getAllByTestId('card')[0]).toHaveTextContent('Bienvenue sur');
+        expect(screen.getAllByTestId('card')[0]).toHaveTextContent('TrackMyFutureJob');
+
+        // AsideDemo
         expect(screen.getByTestId('aside-demo')).toBeInTheDocument();
-    });
 
-    it('renders "Le concept" section', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
+        // Demo screenshots
+        expect(screen.getAllByRole('img', { name: /Application sur desktop/ })).toHaveLength(2);
+
+        // Concept, How it works, Simplicity cards
         expect(screen.getByText('Le concept')).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /Inscrivez-vous dès maintenant/i })).toBeInTheDocument();
-    });
-
-    it('renders "Comment ça marche ?" section', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
         expect(screen.getByText('Comment ça marche ?')).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /Connectez-vous pour commencer/i })).toBeInTheDocument();
+        expect(screen.getByText('La simplicité avant tout')).toBeInTheDocument();
+
+        // Buttons
+        expect(screen.getByText(/Commencer maintenant/i)).toBeInTheDocument();
+        expect(screen.getByText(/Inscrivez-vous dès maintenant/i)).toBeInTheDocument();
+        expect(screen.getByText(/Connectez-vous pour commencer/i)).toBeInTheDocument();
+        expect(screen.getByText(/Essayer dès à présent/i)).toBeInTheDocument();
     });
 
-    it('renders "La simplicité avant tout" section', async () => {
-        (getSession as jest.Mock).mockResolvedValueOnce(null);
-        // @ts-ignore
-        render(await Home());
-        expect(screen.getByText('La simplicité avant tout')).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /Essayer dès à présent/i })).toBeInTheDocument();
+    it('renders logo image in the welcome card', () => {
+        mockGetSession.mockResolvedValue(null);
+
+        render(<Home />);
+        const logoImg = screen.getByAltText('Logo TrackMyFutureJob');
+        expect(logoImg).toBeInTheDocument();
+        expect(logoImg).toHaveAttribute('src', expect.stringContaining('Logo.png'));
+    });
+
+    it('renders all links with correct hrefs', () => {
+        mockGetSession.mockResolvedValue(null);
+
+        render(<Home />);
+        expect(screen.getAllByRole('link', { name: /Commencer maintenant/i })[0]).toHaveAttribute('href', '/auth/login');
+        expect(screen.getAllByRole('link', { name: /Inscrivez-vous dès maintenant/i })[0]).toHaveAttribute('href', '/auth/signup');
+        expect(screen.getAllByRole('link', { name: /Connectez-vous pour commencer/i })[0]).toHaveAttribute('href', '/auth/login');
+        expect(screen.getAllByRole('link', { name: /Essayer dès à présent/i })[0]).toHaveAttribute('href', '/auth/signup');
     });
 });
